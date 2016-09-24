@@ -4,8 +4,7 @@ import csv
 from time import sleep
 import pyupm_i2clcd as lcd
 
-
-myLcd = lcd.Jhd1313m1(0, 0x3E, 0x62) # Initialize Jhd1313m1 at 0x3E (LCD_ADDRESS) and 0x62 (RGB_ADDRESS)
+myLcd = lcd.Jhd1313m1(0, 0x3E, 0x62) #Inicializo o lcd na variavel myLcd
 
 myLcd.setCursor(0,0) #seta a posicao inicial do cursor
 
@@ -13,7 +12,7 @@ myLcd.setColor(53, 39, 249) #cor de fundo em RGB
 
 myLcd.write('Digite sua senha')
 
-def criptografa(senha): #recebe a senha e retorna a senha criptografada
+def criptografa(senha): #recebe a senha e retorna uma string da senha criptografada
 	
 	m = md5.new()
 
@@ -42,8 +41,6 @@ def autentifica(senha):
 	print "Senha nao registrada"
 
 def adiciona_usuario():
-
-
 
 	arq_senhas = csv.reader(open('senhas.csv', 'r')) #abre o arquivo csv com nomes e senhas
 
