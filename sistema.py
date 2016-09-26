@@ -60,7 +60,7 @@ def adiciona_usuario():
 	senhas.append(senha_criptografada)
 
 
-	with open('senhas.csv', 'r') as raw_arq:
+	with open('senhas.csv', 'w') as raw_arq:
 		for i in range(len(pessoas)):
 			raw_arq.write(pessoas[i] + ',' + senhas[i] + '\n')
 
