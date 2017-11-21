@@ -1,7 +1,0 @@
-Para programar em Arduino:
-- Instalar a Board pela IDE Arduino e enviar
-
-Pra programar em Python:
-- sudo screen /dev/ttyUSB0 115200
-- Criar arquivo usando	comando "touch nome_do_arquivo"
-- fazer "vi nome_do_arquivo" para editá-lo

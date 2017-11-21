@@ -1,25 +1,11 @@
 #Adiciona e remove as senhas proibidas para serem usadas como senhas de membros do Lab do GER
 #Leonardo Alves de Melo
 
-import md5
-import csv
+from funcoes import *
 
-######################### DEFINITIONS ###############################
+pasta_padrao = '/etc/init.d/' #Diretorio em que se encontra os scripts e dados do sistema
 
-senhas_ruins = 'senhas_ruins.csv'#'/etc/init.d/senhas_ruins.csv'
-
-########################## FUNCTIONS ################################
-
-#MUDAR
-def le_teclado():
-	return raw_input()
-
-#recebe a senha e retorna uma string da senha criptografada
-def criptografa(senha): 
-
-	m = md5.new()
-	m.update(senha)
-	return m.hexdigest()
+senhas_ruins = pasta_padrao + 'senhas_ruins.csv'
 
 def adiciona_senha_ruim():
 	with open(senhas_ruins) as arq:

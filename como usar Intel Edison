@@ -2,17 +2,15 @@ Para programar em Arduino:
 - Instalar a Board pela IDE Arduino e usar deboas
 
 Pra comunicar com a Edison:
-- Coloque os dois microUSB nas entradas da Edison no PC
-- Abra um terminal e va para o diretorio raiz
-- sudo screen /dev/ttyUSB0 115200
-	- Se for mac fazer sudo screen /dev/cu.usbserial-A502OOCX 115200 -L
-- Apertar Enter
-- Escrever "root"
-
-A pasta com os arquivos do sistema se encontra em /etc/init.d/
+- Coloque o microUSB na entrada da extremidade da Edison no PC
+- Abra o terminal
+- Se estiver no Linux, utilize o comando: "sudo screen /dev/ttyUSB0 115200". Se estiver no Mac, utilize: "sudo screen /dev/cu.usbserial-A502OOCX 115200 -L". Se estiver usando Windows, chora.
+- Aperte Enter
+- Ao solicitar senha, escreva "root"
 
 Para programar em Python:
-- Criar arquivo usando	comando "touch nome_do_arquivo.py"
 - Leia esse tutorial sobre como usar o "vi": https://www.vivaolinux.com.br/artigo/Utilizando-o-Vi-uma-introducao?pagina=4
-- fazer "vi nome_do_arquivo.py" para editá-lo
+- fazer "vi nome_do_arquivo.py" para criar e editá-lo
 - Recomendo programar no computador e apenas fazer um copiar colar no arquivo pelo vi
+
+A pasta com os arquivos do sistema se encontra em /etc/init.d/ na Edison

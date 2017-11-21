@@ -1,26 +1,16 @@
 #Atualiza o banco de dados de usuarios e senhas para acesso ao Lab do GER
 # Leonardo Alves de Melo
 
-import md5
-import csv
+from funcoes import *
 
-######################### DEFINITIONS ###############################
+pasta_padrao = '/etc/init.d/' #Diretorio em que se encontra os scripts e dados do sistema
 
-nome_bd = 'senhas.csv'#'/etc/init.d/senhas.csv'
-senhas_ruins = 'senhas_ruins.csv'#'/etc/init.d/senhas_ruins.csv'
+
+senhas_ruins = pasta_padrao + 'senhas_ruins.csv'
+arquivo_senhas = pasta_padrao + 'senhas.csv' #Nome do arquivo que armazena o Hash das senhas junto com o nome do portador da senha
+
 
 ########################## FUNCTIONS ################################
-
-#MUDAR
-def le_teclado():
-	return raw_input()
-
-#recebe a senha e retorna uma string da senha criptografada
-def criptografa(senha): 
-
-	m = md5.new()
-	m.update(senha)
-	return m.hexdigest()
 
 #Retorna se eh uma senha valida ou nao
 def avalia_senha(senha, pessoa):
@@ -46,7 +36,7 @@ def avalia_senha(senha, pessoa):
 #Adiciona o usuario na lista em ordem alfabetica e salva no BD
 def adiciona_usuario():
 
-	with open(nome_bd, 'r') as arq:
+	with open(arquivo_senhas, 'r') as arq:
 		arqCsv = csv.reader(arq) #abre o arquivo csv com nomes e senhas	
 		pessoa = []
 		for linha in arqCsv:
@@ -67,18 +57,27 @@ def adiciona_usuario():
 		#Cria um loop ateh a pessoa colocar uma senha valida
 		while loop:
 			senha = le_teclado()
-			senha_criptografada = criptografa(senha)
+			senha_criptografada_1 = criptografa(senha)
 
-			#Se estiver tudo bem com a senha, sai do loop
-			if avalia_senha(senha_criptografada, pessoa):
-				loop = False
+			print 'Escreva novamente a senha'
 
-		pessoa.append([nome, senha_criptografada])
+			senha = le_teclado()
+			senha_criptografada_2 = criptografa(senha)
+
+			if senha_criptografada_1 == senha_criptografada_2:
+
+				#Se estiver tudo bem com a senha, sai do loop
+				if avalia_senha(senha_criptografada_1, pessoa):
+					loop = False
+			else:
+				print 'Senhas nao sao iguais!'
+
+		pessoa.append([nome, senha_criptografada_1])
 
 		#Ordena nossa lista em ordem alfabetica
 		pessoa = sorted(pessoa)
 
-	with open(nome_bd, 'w') as arq:
+	with open(arquivo_senhas, 'w') as arq:
 		bd = csv.writer(arq)
 		for linha in pessoa:
 			bd.writerow(linha)
@@ -90,7 +89,7 @@ def adiciona_usuario():
 def remove_usuario():
 
 	#Abre o arquivo do banco de dados
-	with open(nome_bd) as arq:
+	with open(arquivo_senhas) as arq:
 		arqPessoas = csv.reader(arq)
 
 		pessoa = []
@@ -105,15 +104,18 @@ def remove_usuario():
 
 		#Procura a pessoa
 		for i in range(len(pessoa)):
-			print i
 			if pessoa[i][0] == nome:
-				pessoa.pop(i) #Remove a pessoa
-				print 'Pessoa removida com sucesso!'
-				removi = True
+				print 'Tem certeza que deseja remover ' + nome + '? [s/n]'
+				if raw_input() == 's':
+					pessoa.pop(i) #Remove a pessoa
+					print 'Pessoa removida com sucesso!'
+					removi = True
+				else: 
+					print 'Pessoa nao removida!'
 				break
 
 		if removi:
-			with open(nome_bd, 'w') as arq:
+			with open(arquivo_senhas, 'w') as arq:
 				bd = csv.writer(arq)
 				for linha in pessoa:
 					bd.writerow(linha)
@@ -137,7 +139,7 @@ while loop:
 	elif comando == '2':
 		remove_usuario()
 	elif comando == '3':
-		with open(nome_bd, 'r') as arq:
+		with open(arquivo_senhas, 'r') as arq:
 			arqCsv = csv.reader(arq)
 			print '\n----------Lista----------'
 			for linha in arqCsv:
