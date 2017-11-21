@@ -5,8 +5,11 @@ Pra comunicar com a Edison:
 - Coloque os dois microUSB nas entradas da Edison no PC
 - Abra um terminal e va para o diretorio raiz
 - sudo screen /dev/ttyUSB0 115200
+	- Se for mac fazer sudo screen /dev/cu.usbserial-A502OOCX 115200 -L
 - Apertar Enter
 - Escrever "root"
+
+A pasta com os arquivos do sistema se encontra em /etc/init.d/
 
 Para programar em Python:
 - Criar arquivo usando	comando "touch nome_do_arquivo.py"
