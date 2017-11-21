@@ -1,6 +1,3 @@
-Para programar em Arduino:
-- Instalar a Board pela IDE Arduino e usar deboas
-
 Pra comunicar com a Edison:
 - Coloque o microUSB na entrada da extremidade da Edison no PC
 - Abra o terminal
@@ -8,9 +5,29 @@ Pra comunicar com a Edison:
 - Aperte Enter
 - Ao solicitar senha, escreva "root"
 
+A pasta com os arquivos do sistema se encontra em /etc/init.d/ na Edison, ou seja, digute "cd /etc/init.d/" para ir para a Home do sistema
+
+Programas disponíveis:
+- sistema.py: contém a Main do sistema
+- funcoes.py: contém todas as funcoes do sistema, desde LCD, criptografia, leitura do teclado e outros.
+- atualiza_bd.py: Script que cria, deleta e observa lista de usuários cadastrados.
+- cria_senhas_ruins.py: Script que cria todas as senhas que não devem ser utilizadas por usuários.
+
+Arquivos de dados:
+- senhas.csv: contém todos os usuários e suas respectivas senhas criptografadas, em linha.
+- senhas_ruins.csv: contém todas as senhas criptografadas que não devem ser utilizadas, em linha
+
 Para programar em Python:
 - Leia esse tutorial sobre como usar o "vi": https://www.vivaolinux.com.br/artigo/Utilizando-o-Vi-uma-introducao?pagina=4
 - fazer "vi nome_do_arquivo.py" para criar e editá-lo
-- Recomendo programar no computador e apenas fazer um copiar colar no arquivo pelo vi
+- Recomendo programar no computador e apenas fazer um copiar-colar no arquivo pelo vi
 
-A pasta com os arquivos do sistema se encontra em /etc/init.d/ na Edison
+Para verificar o tempo atual da Edison:
+- Escreva "date"
+
+Caso o tempo da Edison fique desconfigurado:
+- Para setar a data: timedatectl set-time '2017-11-21'
+- Para setar a hora: timedatectl set-time '16:00'
+
+Para programar em Arduino:
+- Instalar a Board pela IDE Arduino
